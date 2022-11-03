@@ -6,6 +6,9 @@
  */
 
 /*=== MEDIA QUERY ===*/
+
+{% load static %}
+
 @import url("https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,600,700|Montserrat|Poppins:400,500,600,700");
 body {
   line-height: 1.8;

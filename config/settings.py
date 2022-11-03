@@ -3,9 +3,11 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config['SECRET_KEY']
 
-DEBUG = config['DEBUG']
+SECRET_KEY = config('SECRET_KEY')
+
+
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -52,8 +54,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+
 DATABASES = {
-    'default':{
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
@@ -79,26 +82,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LANGUAGE_CODE = "en-us"
 
-
-LANGUAGE_CODE = 'en'
-
-TIME_ZONE = 'Asia/Tashkent'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
 
-LANGUAGES = (
-    ('uz', "Uzbek"),
-    ('ru', "Russian"),
-)
+# LANGUAGES = (
+#     ('uz', "Uzbek"),
+#     ('ru', "Russian"),
+# )
 
-LOCALE_PATHS = [
-    BASE_DIR / 'locales'
-]
-
-
+# LOCALE_PATHS = [
+#     BASE_DIR / 'locales',
+# ]
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
@@ -107,8 +106,6 @@ STATICFILES_DIRS = BASE_DIR / 'assets',
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
