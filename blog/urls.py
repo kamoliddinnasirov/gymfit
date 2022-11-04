@@ -1,12 +1,11 @@
 from django.urls import path
-from .views import *
+from .views import BlogGridView, PostListView, CommentCreateView
+
+app_name = 'blog'
 
 urlpatterns = [
-    path('', HomeView.as_view()),
-    path('about/', AboutView.as_view()),
-    path('blog/', BlogView.as_view()),
-    path('blog-sidebar/', BlogSView.as_view()),
-    path('blog-single/', BlogSiView.as_view()),
-    path('membership/', PriceView.as_view()),
-    path('contact/', ContactView.as_view()),
+    path('', PostListView.as_view(), name='posts'),
+    path('<int:pk>/comment/', CommentCreateView.as_view(), name='comment'),
+    # path('blog/', BlogView.as_view()),
+
 ]
