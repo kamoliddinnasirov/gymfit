@@ -2,12 +2,6 @@ from django.contrib import admin
 from .models import *
 
 
-@admin.register(BlogGridMainModel)
-class BlogGridMainAdmin(admin.ModelAdmin):
-    list_display = ('banner_title',)
-    list_display_links = ('banner_title',)
-
-
 @admin.register(PostTagModel)
 class TagModelAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -20,8 +14,8 @@ class TagModelAdmin(admin.ModelAdmin):
 
 @admin.register(PostModel)
 class PostModelAdmin(admin.ModelAdmin):
-    list_display = ('title', 'auther', 'created_at')
-    list_display_links = ('title', 'auther')
+    list_display = ('title', 'auther', 'blog_title', 'created_at')
+    list_display_links = ('title', 'blog_title', 'auther')
     list_filter = ('created_at',)
     search_fields = ('title', 'body')
     autocomplete_fields = ('auther', 'tag')
