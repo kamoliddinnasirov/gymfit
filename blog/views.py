@@ -1,21 +1,27 @@
 from django.shortcuts import render, get_object_or_404, reverse
-from django.views.generic import ListView, CreateView
-from .models import PostModel
-from .forms import CommentModelForm
+from django.views.generic import ListView, CreateView, DetailView
+from blog.models import PostModel, BlogGridModel
+from blog.forms import CommentModelForm
 
 
+# class BlogSideMainView(ListView):
 
 
 class PostListView(ListView):
-    model = PostModel
-    template_name = 'blog/blog.html'
+    template_name = 'blog/blog-sidebar.html'
 
     def get_queryset(self):
         qs = PostModel.objects.order_by('-id')
-        tag = self.request.GET.get('tag')
+        tag = self.request.GET.get('tag', None)
         if tag:
             qs = qs.filter(tag__name=tag)
         return qs
+
+    # def get_context_data(self,  **kwargs):
+
+class PostDetailView(DetailView):
+    model = PostModel
+    template_name = 'blog/blog-single.html'
 
 
 class CommentCreateView(CreateView):
@@ -28,5 +34,3 @@ class CommentCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('blog:detail', kwargs={'pk': self.kwargs.get('pk')})
-
-

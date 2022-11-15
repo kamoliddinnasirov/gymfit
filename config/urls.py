@@ -11,12 +11,12 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    # path('about/', include('about.urls')),
-    # path('pages/', include('pages.urls')),
-    # path('services/', include('services.urls')),
-    # path('membership/', include('membership.urls')),
+    path('', include('home.urls')),
     path('blog/', include('blog.urls')),
-    # path('contact/', include('contact.urls')),
+    path('pages/', include('pages.urls')),
+    path('services/', include('services.urls')),
+
+    path('contact/', include('contact.urls')),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

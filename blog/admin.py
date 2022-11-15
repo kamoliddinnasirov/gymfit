@@ -1,22 +1,29 @@
 from django.contrib import admin
-from .models import *
+from blog.models import PostTagModel, BlogGridModel, PostModel, CommentModel, AuthorModel, ArticleModel
 
 
 @admin.register(PostTagModel)
 class TagModelAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
-    list_filter = ('created_at',)
     search_fields = ('name',)
 
+@admin.register(ArticleModel)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('article',)
+    list_display_links = ('article',)
 
+
+@admin.register(BlogGridModel)
+class BlogGridAdmin(admin.ModelAdmin):
+    list_display = ('blog_title',)
+    list_display_links = ('blog_title',)
 
 
 @admin.register(PostModel)
 class PostModelAdmin(admin.ModelAdmin):
-    list_display = ('title', 'auther', 'blog_title', 'created_at')
-    list_display_links = ('title', 'blog_title', 'auther')
-    list_filter = ('created_at',)
+    list_display = ('title', 'auther', )
+    list_display_links = ('title', 'auther')
     search_fields = ('title', 'body')
     autocomplete_fields = ('auther', 'tag')
 
@@ -25,8 +32,7 @@ class PostModelAdmin(admin.ModelAdmin):
 class CommentModelAdmin(admin.ModelAdmin):
     list_display = ('name', 'email')
     list_display_links = ('name', 'email')
-    list_filter = ('created_at',)
-
+    search_fields = ('comment',)
 
 @admin.register(AuthorModel)
 class AutherModelAdmin(admin.ModelAdmin):

@@ -24,6 +24,10 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     'blog',
+    'contact',
+    'pages',
+    'services',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +104,7 @@ LOCALE_PATHS = [
 ]
 
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 

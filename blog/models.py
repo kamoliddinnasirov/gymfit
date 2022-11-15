@@ -3,9 +3,16 @@ from django.utils.translation import gettext_lazy as _
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+
+
 class AuthorModel(models.Model):
     full_name = models.CharField(max_length=100, verbose_name=_('full name'))
-    image = models.ImageField(upload_to='auther_images/', verbose_name=_('image'))
 
     def __str__(self):
         return self.full_name
@@ -15,9 +22,18 @@ class AuthorModel(models.Model):
         verbose_name_plural = _('authors')
 
 
-class PostTagModel(models.Model):
+class ArticleModel(BaseModel):
+    article = models.TextField(verbose_name=_('article'))
+
+    def __str__(self):
+        return self.article
+
+    class Meta:
+        verbose_name = _('article')
+        verbose_name_plural = _('articles')
+
+class PostTagModel(BaseModel):
     name = models.CharField(max_length=30, verbose_name=_('name'))
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
 
     def __str__(self):
         return self.name
@@ -27,33 +43,41 @@ class PostTagModel(models.Model):
         verbose_name_plural = _('tags')
 
 
-
-
-class PostModel(models.Model):
+class BlogGridModel(models.Model):
     blog_title = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('banner title'))
-    title = models.CharField(max_length=255, verbose_name=_('title'))
-    trainer_image = models.ImageField(upload_to='trainer/', verbose_name=_('trainer image'))
-    main_image = models.ImageField(upload_to='main_images/', verbose_name=_('main image'))
-    body = RichTextUploadingField(verbose_name=_('body'))
-    advice = RichTextUploadingField(verbose_name=_('advice'))
-    auther = models.ForeignKey(AuthorModel, related_name='posts', on_delete=models.RESTRICT)
-    tag = models.ManyToManyField(PostTagModel, related_name='posts', verbose_name=_('tag'))
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
 
     def __str__(self):
-        return f"{self.title[:100]} ..."
+        return self.blog_title
 
     class Meta:
+        verbose_name = _('BlogGridTitle')
+        verbose_name_plural = _('BlogGridTitles')
+
+
+class PostModel(BaseModel):
+    title = models.CharField(max_length=255, verbose_name=_('title'))
+    trainer_image = models.ImageField(upload_to='trainer/', verbose_name=_('trainer image'))
+    article = models.ForeignKey(ArticleModel, on_delete=models.RESTRICT)
+    main_image = models.ImageField(upload_to='main_images/', verbose_name=_('main image'))
+    body = models.TextField(verbose_name=_('body'))
+    advice = models.TextField(verbose_name=_('advice'))
+    auther = models.ForeignKey(AuthorModel, related_name='posts', on_delete=models.RESTRICT)
+    tag = models.ManyToManyField(PostTagModel, related_name='posts', verbose_name=_('tag'))
+
+    def __str__(self):
+        return f"{self.title[:50]} ..."
+
+    class Meta:
+        # ordering = ('-id',)
         verbose_name = _('post')
         verbose_name_plural = _('posts')
 
 
-class CommentModel(models.Model):
+class CommentModel(BaseModel):
     name = models.CharField(max_length=255, verbose_name=_('name'))
     email = models.EmailField(verbose_name=_('email'))
     comment = models.TextField(verbose_name=_('comment'))
     post = models.ForeignKey(PostModel, on_delete=models.CASCADE, related_name='comments', verbose_name=_('post'))
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
 
     def __str__(self):
         return f"{self.name}\n{self.email}\n{self.comment}"
@@ -61,4 +85,3 @@ class CommentModel(models.Model):
     class Meta:
         verbose_name = _('comment')
         verbose_name_plural = _('comments')
-
