@@ -30,8 +30,8 @@ class PostModelAdmin(admin.ModelAdmin):
 
 @admin.register(CommentModel)
 class CommentModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email')
-    list_display_links = ('name', 'email')
+    list_display = ('email',)
+    list_display_links = ('email',)
     search_fields = ('comment',)
 
 @admin.register(AuthorModel)

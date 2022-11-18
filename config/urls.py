@@ -15,7 +15,6 @@ urlpatterns += i18n_patterns(
     path('blog/', include('blog.urls')),
     path('pages/', include('pages.urls')),
     path('services/', include('services.urls')),
-
     path('contact/', include('contact.urls')),
 )
 

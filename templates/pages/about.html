@@ -12,6 +12,9 @@
                             <a href="../home/index.html"
                                class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a>
                         </li>
+                        {% for i in object_list %}
+                        {{ i.get_experience_date }}
+                        {% endfor %}
                         <li class="list-inline-item"><span class="text-white">|</span></li>
                         <li class="list-inline-item">
                             <a href="#" class="text-color text-uppercase text-sm letter-spacing">

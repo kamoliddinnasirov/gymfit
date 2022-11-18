@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+from pages.models import PopularTrainer
+
+
+
+class PopListView(ListView):
+    model = PopularTrainer
+    template_name = 'pages/about.html'
