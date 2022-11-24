@@ -1,8 +1,8 @@
 from django.urls import path
-from pages.views import PopListView
+from pages.views import TrainerView
 
 app_name = 'pages'
 
 urlpatterns = [
-    path('ab/', PopListView.as_view())
+    path('trainers/', TrainerView.as_view(), name="trainer"),
 ]

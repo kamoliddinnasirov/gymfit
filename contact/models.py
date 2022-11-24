@@ -14,10 +14,26 @@ class ContactBannerModel(BaseModel):
         verbose_name = _('banner')
         verbose_name_plural = _('banners')
 
+
+class ContactSendModel(BaseModel):
+    title = models.CharField(max_length=100, null=True, blank=True, verbose_name=_('title'))
+    sub_title = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('sub title'))
+    name = models.CharField(max_length=32, verbose_name=_('name'))
+    email = models.EmailField(verbose_name=_('email'))
+    massage = models.TextField(verbose_name=_('massage'))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('contact send')
+        verbose_name_plural = _('contact sends')
+
+
 class ContactModel(BaseModel):
     phone = models.CharField(max_length=13)
-    from_time = models.DateTimeField()
-    to_time = models.DateTimeField()
+    from_time = models.TimeField()
+    to_time = models.TimeField()
     email = models.EmailField()
     location = models.CharField(max_length=50)
 

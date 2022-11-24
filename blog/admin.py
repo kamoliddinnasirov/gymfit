@@ -4,9 +4,9 @@ from blog.models import PostTagModel, BlogGridModel, PostModel, CommentModel, Au
 
 @admin.register(PostTagModel)
 class TagModelAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'created_at')
     list_display_links = ('name',)
-    search_fields = ('name',)
+    search_fields = ('name', 'created_at')
 
 @admin.register(ArticleModel)
 class ArticleAdmin(admin.ModelAdmin):

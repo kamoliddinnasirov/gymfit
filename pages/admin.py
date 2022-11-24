@@ -56,7 +56,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('created_at',)
 
 
-class TrainerGalleryAdmin(TabularInline):
+class TrainerGalleryAdmin(admin.TabularInline):
     model = TrainerGallery
 
 @admin.register(OurTrainer)
@@ -76,11 +76,11 @@ class CourseBannerAdmin(admin.ModelAdmin):
     list_filter = ('created_at',)
 
 
-class CourseGallery(TabularInline):
+class CourseGallery(admin.TabularInline):
     model = PopularCourseGallery
 
 
-class MentorAdmin(TabularInline):
+class MentorAdmin(admin.TabularInline):
     model = Mentor
 
 

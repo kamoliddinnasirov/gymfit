@@ -45,20 +45,18 @@ class GalleryMain(BaseModel):
     sub_title = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('sub title'))
 
     def __str__(self):
-        return self.title
+        return f"{self.title}"
 
     class Meta:
         verbose_name = _('gallery main')
         verbose_name_plural = _('gallery main')
 
 
-class Gallery(BaseModel):
+class Gallery(BaseModel): #admin.py TabularInline
     gallery = models.ForeignKey(GalleryMain, on_delete=models.RESTRICT)
     image = models.ImageField(upload_to='about_gallery/%Y/%m/%d/', default='some_value', verbose_name=_('image'))
     is_active = models.BooleanField(default=False, verbose_name=_('is_active'))
 
-    def __str__(self):
-        return self.gallery
 
     class Meta:
         verbose_name = _("gallery")
@@ -87,6 +85,7 @@ class Weeks(BaseModel):
         return self.name
 
     class Meta:
+        ordering = ('id',)
         verbose_name = _('week')
         verbose_name_plural = _('weeks')
 
@@ -95,7 +94,7 @@ class Category(BaseModel):
     name = models.CharField(max_length=50, verbose_name=_("name"))
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
     class Meta:
         verbose_name = _('category')
@@ -103,8 +102,9 @@ class Category(BaseModel):
 
 
 class OurTrainer(BaseModel):
+    # image = models.ImageField(upload_to='trainer')
     full_name = models.CharField(max_length=255, verbose_name=_('full name'))
-    category = models.ForeignKey(Category, on_delete=models.RESTRICT, verbose_name=_('category'))
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('category'))
     achievement = models.CharField(max_length=100, verbose_name=_('achievement'))
     facebook = models.URLField()
     twitter = models.URLField()
@@ -112,19 +112,17 @@ class OurTrainer(BaseModel):
     # image = TubalarInline
 
     def __str__(self):
-        return f"{self.full_name}, {self.category}"
+        return f"{self.full_name}, {str(self.category)}"
 
     class Meta:
         verbose_name = _('Our trainer')
         verbose_name_plural = _('Our trainer')
 
-class TrainerGallery(BaseModel):
-    gallery = models.ForeignKey(OurTrainer, on_delete=models.RESTRICT, verbose_name=_('gallery'))
+class TrainerGallery(BaseModel): #admin.py TabularInline
+    gallery = models.ForeignKey(OurTrainer, on_delete=models.CASCADE, verbose_name=_('gallery'))
     image = models.ImageField(upload_to='TrainerGallery/', default='some_value')
     is_active = models.BooleanField(default=False, verbose_name=_('is_active'))
 
-    def __str__(self):
-        return self.gallery
 
     class Meta:
         verbose_name = _("gallery")
@@ -145,7 +143,6 @@ class CourseBanner(BaseModel):
 
 
 class PopularCourse(BaseModel):
-    # title = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('title'))
     course = models.ForeignKey(Category, on_delete=models.RESTRICT, verbose_name=_('course'))
     # mentor = TabularInline
     weeks = models.ManyToManyField(Weeks, verbose_name=_('weeks'))
@@ -154,7 +151,7 @@ class PopularCourse(BaseModel):
     # main_banner = TabularInline
 
     def __str__(self):
-        return f"{self.weeks}"
+        return str(self.weeks)
 
     class Meta:
         verbose_name = _('popular course')
@@ -167,7 +164,7 @@ class Mentor(BaseModel): # admin.py TabularInline uchun
     is_active = models.BooleanField(default=False, verbose_name=_('is_active'))
 
     def __str__(self):
-        return self.name
+        return f"{self.full_name}"
 
     class Meta:
         verbose_name = _("mentor")
@@ -179,12 +176,13 @@ class PopularCourseGallery(BaseModel):  # admin.py TabularInline uchun
     image = models.ImageField(upload_to='PopularCourseGallery/', default='some_value')
     is_active = models.BooleanField(default=False, verbose_name=_('is_active'))
 
-    def __str__(self):
-        return self.gallery
+    # def __str__(self):
+    #     return self.gallery
 
     class Meta:
         verbose_name = _("gallery")
         verbose_name_plural = _('gallery')
+
 
 
 # =========================Course Single==================
@@ -195,11 +193,11 @@ class CourseSingleBanner(BaseModel):
                                        verbose_name=_('course_single_banner'))
 
     def __str__(self):
-        return self.course_single_title
+        return f"{self.course_single_title}"
 
     class Meta:
-        verbose_name = _('Course Single Banner')
-        verbose_name_plural = _('Course Single Banners')
+        verbose_name = _('Course single banner')
+        verbose_name_plural = _('Course single banners')
 
 class CSingle(BaseModel):
     hours = models.CharField(max_length=50, verbose_name=_('hours'))
@@ -213,8 +211,8 @@ class CSingle(BaseModel):
         return f"{self.type_workout}"
 
     class Meta:
-        verbose_name = _('Course Single')
-        verbose_name_plural = _('Course Single')
+        verbose_name = _('Course single')
+        verbose_name_plural = _('Course single')
 
 class Feature(BaseModel):
     category = models.ForeignKey(Category, on_delete=models.RESTRICT, verbose_name=_('category'))

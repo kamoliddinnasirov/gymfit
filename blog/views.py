@@ -1,11 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views.generic import ListView, CreateView, DetailView
-from blog.models import PostModel, BlogGridModel
+from blog.models import PostModel, BlogGridModel, AuthorModel, PostTagModel, BlogGridModel, CommentModel
 from blog.forms import CommentModelForm
-
-
-# class BlogSideMainView(ListView):
-
 
 class PostListView(ListView):
     template_name = 'blog/blog-sidebar.html'
