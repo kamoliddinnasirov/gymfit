@@ -123,19 +123,18 @@
                         <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                             <div class="card rounded-0 px-4 py-5 bg-4">
                                 <div class="position-relative">
-
                                     <h4 class="card-title text-white text-capitalize font-weight-normal font-secondary">
                                         {{ object.title }}</h4>
                                     <h3 class="text-lg text-white font-secondary position-relative  mt-2"><sup
                                             class="text-sm position-absolute">$</sup>{{ object.price }}<sub>{{ object.price_title }}</sub>
                                     </h3>
-
                                     <div class="card-body mt-2">
                                         <ul class="list-unstyled lh-35 mb-4">
                                             {% if object.check_close == 1 %}
+
                                                 <li class="text-white">
                                                     <i class="ti-check mr-3 text-color "></i>
-                                                    {{ object.service }}
+                                                    {{ object.services }}
                                                 </li>
                                             {% else %}
                                                 <li class="text-white-50">

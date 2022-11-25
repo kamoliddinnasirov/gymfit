@@ -14,7 +14,8 @@
                                                             class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a>
                             </li>
                             <li class="list-inline-item"><span class="text-white">|</span></li>
-                            <li class="list-inline-item text-color text-uppercase text-sm letter-spacing">Our services</li>
+                            <li class="list-inline-item text-color text-uppercase text-sm letter-spacing">Our services
+                            </li>
                         </ul>
                         <h1 class="text-lg text-white mt-2">What We do</h1>
                     </div>
@@ -110,6 +111,7 @@
         <!-- Section About End -->
 
         <!-- Section Testimonial Start -->
+
         <section class="section textimonial position-relative bg-3">
             <div class="container">
                 <div class="row justify-content-center">
@@ -122,9 +124,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="testimonial-slider">
-                            {% for object in object_list %}
+                        {% for object in object_list %}
+                            <div class="testimonial-slider">
                                 <div class="text-center mb-4 ">
                                     <i class="ti-quote-left text-lg text-color"></i>
                                     <h3 class="mt-4 text-white letter-spacing">{{ object.title }}</h3>
@@ -134,12 +135,14 @@
                                         <span class="text-white-50">{{ object.job }}</span>
                                     </div>
                                 </div>
-                            {% endfor %}
-                        </div>
+                                {% endfor %}
+                            </div>
+
                     </div>
                 </div>
             </div>
         </section>
+
     </div>
     <!-- Section Testimonial END -->
 {% endblock %}

@@ -46,12 +46,12 @@
                                                     {{ object.auther }}
                                                 </span>
                                         </div>
-                                        <a href="{% url 'blog:detail'  %}"><h4
+                                        <a href="{% url 'blog:detail' pk=object.pk %}"><h4
                                                 class="mb-3 font-secondary">{{ object.title }}</h4></a>
 
                                         <p class="mb-4">{{ object.body|safe|truncatewords:"5" }}</p>
 
-                                        <a href="blog-single.html" class="text-color mb-3 d-block"><i
+                                        <a href="{% url 'blog:detail' pk=object.pk %}" class="text-color mb-3 d-block"><i
                                                 class="ti-minus mr-2"></i> Read More</a>
                                     </div>
                                 </article>

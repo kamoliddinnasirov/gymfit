@@ -1,5 +1,5 @@
 from django.contrib import admin
-from contact.models import ContactBannerModel, ContactModel, ContactSendModel
+from contact.models import ContactBannerModel, ContactModel
 
 @admin.register(ContactBannerModel)
 class ContactBanner(admin.ModelAdmin):
@@ -7,12 +7,6 @@ class ContactBanner(admin.ModelAdmin):
     list_display_links = ('contact_title',)
     list_filter = ('created_at',)
 
-@admin.register(ContactSendModel)
-class ContactSend(admin.ModelAdmin):
-    list_display = ('name', 'email', 'created_at')
-    list_display_links = ('name', 'email')
-    search_fields = ('name', 'email', 'massage')
-    list_filter = ('created_at',)
 
 @admin.register(ContactModel)
 class Contact(admin.ModelAdmin):

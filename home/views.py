@@ -10,7 +10,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['homes'] = Home.objects.all()
-        data['categories'] = HomeCategory.objects.order_by('-pk')[:3]
+        data['categories'] = HomeCategory.objects.order_by('pk')[:3]
         data['people_say'] = PeopleSay.objects.all()
         return data
 
@@ -23,3 +23,4 @@ class BaseView(TemplateView):
         data['navbar'] = Navbar.objects.order_by('-pk')
         data['footer'] = Footer.objects.all()
         return data
+

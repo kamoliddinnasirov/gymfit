@@ -40,7 +40,7 @@ class Footer(BaseModel):
 
 class Home(BaseModel):
     club_name = models.CharField(max_length=20, null=True, blank=True, verbose_name=_('club name'))
-    home_title = RichTextUploadingField(max_length=155, null=True, blank=True, verbose_name=_('home title'))
+    home_title = RichTextUploadingField(max_length=255, null=True, blank=True, verbose_name=_('home title'))
     home_banner = models.ImageField(upload_to='home_banner/%Y/%m/%d/', null=True, blank=True, verbose_name=_('home banner'))
 
     def __str__(self):
@@ -51,7 +51,8 @@ class Home(BaseModel):
         verbose_name_plural = _('Home')
 
 class HomeCategory(BaseModel):
-    home = models.ForeignKey(Home, on_delete=models.RESTRICT)
+    home = models.ForeignKey(Home, on_delete=models.CASCADE)
+    cat_number = models.PositiveIntegerField()
     home_cat_name = models.CharField(max_length=20, null=True, blank=True, verbose_name=_('home category name'))
     cat_description = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('category description'))
 
@@ -60,7 +61,7 @@ class HomeCategory(BaseModel):
         return f"{self.home_cat_name}"
 
     class Meta:
-        ordering = ('-id',)
+        # ordering = ('-id',)
         verbose_name = _('home category')
         verbose_name_plural = _('home categories')
 

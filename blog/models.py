@@ -74,8 +74,20 @@ class PostModel(BaseModel):
         verbose_name_plural = _('blog posts')
 
 
+class BlogContact(BaseModel): #tabularInline
+    contact = models.ForeignKey(PostModel, on_delete=models.RESTRICT, verbose_name=_('contact'))
+    facebook = models.URLField(null=True, blank=True, verbose_name=_('facebook'))
+    twitter = models.URLField(null=True, blank=True, verbose_name=_('twitter'))
+    linkedin = models.URLField(null=True, blank=True, verbose_name=_('linkedin'))
+    pinterest = models.URLField(null=True, blank=True, verbose_name=_('pinterest'))
+
+    class Meta:
+        ordering = ('-pk',)[:1]
+        verbose_name = _('Blog contact')
+        verbose_name_plural = _('Blog contact')
+
 class CommentModel(BaseModel):
-    # name = models.CharField(max_length=255, verbose_name=_('name'))
+    name = models.CharField(max_length=255, verbose_name=_('name'))
     email = models.EmailField(verbose_name=_('email'))
     comment = models.TextField(verbose_name=_('comment'))
     post = models.ForeignKey(PostModel, on_delete=models.CASCADE, related_name='comments', verbose_name=_('post'))

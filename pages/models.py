@@ -16,15 +16,15 @@ class AboutBanner(BaseModel):
         return f"{self.about_title}"
 
     class Meta:
-        verbose_name = _('About Banner')
-        verbose_name_plural = _('About Banner')
+        verbose_name = _('About banner')
+        verbose_name_plural = _('About banner')
 
 
 class PopularTrainer(BaseModel):
     image1 = models.ImageField(upload_to='popular_people/%Y/%m/%d/', verbose_name=_('1 image'))
     image2 = models.ImageField(upload_to='popular_people2/%Y/%m/%d/', verbose_name=_('2 image'))
-    started = models.PositiveIntegerField(validators=[MaxValueValidator(4)], verbose_name=_('started'))
-    people_about = RichTextUploadingField(max_length=50, verbose_name=_('people about'))
+    started = models.PositiveIntegerField(validators=[MaxValueValidator(3000)], verbose_name=_('started'))
+    people_about = RichTextUploadingField(max_length=255, verbose_name=_('people about'))
 
     def get_experience_date(self):
         experience = datetime.date.today()
@@ -75,8 +75,8 @@ class TrainerBanner(BaseModel):
         return self.trainer_title
 
     class Meta:
-        verbose_name = _('trainer banner')
-        verbose_name_plural = _('trainer banners')
+        verbose_name = _('Trainer banner')
+        verbose_name_plural = _('TrainerBanners')
 
 class Weeks(BaseModel):
     name = models.CharField(max_length=50, verbose_name=_('name'))
@@ -138,13 +138,14 @@ class CourseBanner(BaseModel):
         return self.courses_title
 
     class Meta:
-        verbose_name = _('course banner')
-        verbose_name_plural = _('courses banner')
+        verbose_name = _('Banner')
+        verbose_name_plural = _('Banner')
 
 
 class PopularCourse(BaseModel):
     course = models.ForeignKey(Category, on_delete=models.RESTRICT, verbose_name=_('course'))
-    # mentor = TabularInline
+    mentor = models.CharField(max_length=255, verbose_name=_('name'))
+    full_name = models.CharField(max_length=50, verbose_name=_('full_name'))
     weeks = models.ManyToManyField(Weeks, verbose_name=_('weeks'))
     from_time = models.TimeField(auto_now=False, verbose_name=_('from time'))
     to_time = models.TimeField(auto_now=False, verbose_name=_('to time'))
@@ -156,20 +157,6 @@ class PopularCourse(BaseModel):
     class Meta:
         verbose_name = _('popular course')
         verbose_name_plural = _('popular courses')
-
-
-class Mentor(BaseModel): # admin.py TabularInline uchun
-    name = models.ForeignKey(PopularCourse, on_delete=models.RESTRICT, verbose_name=_('name'))
-    full_name = models.CharField(max_length=50, verbose_name=_('full_name'))
-    is_active = models.BooleanField(default=False, verbose_name=_('is_active'))
-
-    def __str__(self):
-        return f"{self.full_name}"
-
-    class Meta:
-        verbose_name = _("mentor")
-        verbose_name_plural = _('mentors')
-
 
 class PopularCourseGallery(BaseModel):  # admin.py TabularInline uchun
     gallery = models.ForeignKey(PopularCourse, on_delete=models.RESTRICT,  verbose_name=_('gallery'))

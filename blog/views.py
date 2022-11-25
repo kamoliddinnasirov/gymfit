@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic import ListView, CreateView, DetailView
 from blog.models import PostModel, BlogGridModel, AuthorModel, PostTagModel, BlogGridModel, CommentModel
 from blog.forms import CommentModelForm
+
 
 class PostListView(ListView):
     template_name = 'blog/blog-sidebar.html'
@@ -13,7 +14,7 @@ class PostListView(ListView):
             qs = qs.filter(tag__name=tag)
         return qs
 
-    # def get_context_data(self,  **kwargs):
+
 
 class PostDetailView(DetailView):
     model = PostModel

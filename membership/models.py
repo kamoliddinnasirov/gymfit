@@ -5,8 +5,10 @@ from django.utils.translation import gettext_lazy as _
 
 class  Package(BaseModel):
     title = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('title'))
-    price_title = models.CharField(max_length=50, verbose_name=_("price title"))
+    services = models.CharField(max_length=50, verbose_name=_('services'))
+    continue_package = models.CharField(max_length=50, verbose_name=_("continue package"))
     price = models.PositiveIntegerField()
+    check_close = models.BooleanField(help_text="(0)-close, (1)-check", verbose_name=_('check close'))
     popular = models.BooleanField(help_text=_("(check)-popular"))
 
 
@@ -18,14 +20,13 @@ class  Package(BaseModel):
         verbose_name_plural = _ ('packages')
 
 
-class Service(BaseModel): # admin.py TabularInline
-    service = models.ForeignKey(Package, on_delete=models.CASCADE, verbose_name=_("service"))
-    services = models.CharField(max_length=50, verbose_name=_('services'))
-    check_close = models.BooleanField(help_text="(0)-close, (1)-check", verbose_name=_('check close'))
-
-    def __str__(self):
-        return self.services
-
-    class Meta:
-        verbose_name = _("service")
-        verbose_name_plural = _("services")
+# class Service(BaseModel): # admin.py TabularInline
+#     service = models.ForeignKey(Package, on_delete=models.CASCADE, verbose_name=_("service"))
+#
+#
+#     def __str__(self):
+#         return self.services
+#
+#     class Meta:
+#         verbose_name = _("service")
+#         verbose_name_plural = _("services")

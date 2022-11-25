@@ -33,6 +33,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navigation fixed-top" id="navbar">
+    {#    {% for navbar_item in navbar %}#}
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url "home:main" %}">
             <h2 class="text-white text-capitalize">GYM<span class="text-color">FIT</span></h2>
@@ -47,25 +48,21 @@
                     <a class="nav-link" href="{% url "home:main" %}">{% translate "Home" %}<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url "pages:train" %}" data-toggle="dropdown" aria-haspopup="true"
+                    <a class="nav-link dropdown-toggle" href="{% url "pages:trainer" %}" data-toggle="dropdown"
+                       aria-haspopup="true"
                        aria-expanded="false">{% translate "Pages." %}</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url "pages:about"  %}">{% translate "About" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url "pages:about" %}">{% translate "About" %}</a></li>
                         <li><a class="dropdown-item" href="{% url "pages:trainer" %}">{% translate "Trainer" %}</a></li>
                         <li><a class="dropdown-item" href="{% url "pages:course" %}">{% translate "Courses" %}</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{% url "services:service" %}">{% translate "Services" %}</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url "membership:price" %}">{% translate "Memebership" %}</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">{% translate "Blog." %}</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="blog-sidebar.html">{% translate "Blog" %}</a></li>
-                        <li><a class="dropdown-item" href="blog-single.html">{% translate "Blog Details" %}</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="{% url "contact:contact" %}">{% translate "Contact" %}</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="{% url "services:service" %}">{% translate "Services" %}</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="{% url "blog:posts" %}">{% translate "Blog" %}</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="{% url "contact:contact" %}">{% translate "Contact" %}</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">{% translate "Languages." %}</a>
@@ -83,6 +80,7 @@
             </div>
         </div>
     </div>
+    {#    {% endfor %}#}
 </nav>
 
 

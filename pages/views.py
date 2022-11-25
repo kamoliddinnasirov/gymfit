@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
 from pages.models import AboutBanner, PopularTrainer, GalleryMain, TrainerBanner, \
     Weeks, Category, OurTrainer, CourseBanner, PopularCourse, CourseSingleBanner, CSingle, Feature, Gallery, \
-    TrainerGallery
+    TrainerGallery, Mentor, PopularCourseGallery
 
 
 class AboutView(TemplateView):
@@ -35,6 +35,8 @@ class CourseView(TemplateView):
         data['course_banner'] = CourseBanner.objects.order_by('-pk')[:1]
         data['popular_courses'] = PopularCourse.objects.all()
         data['weeks'] = Weeks.objects.all()
+        data['ments'] = Mentor.objects.all()
+        data['images'] = PopularCourseGallery.objects.all()
         return data
 
 class CourseSingleView(TemplateView):

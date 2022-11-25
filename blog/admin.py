@@ -1,5 +1,6 @@
 from django.contrib import admin
-from blog.models import PostTagModel, BlogGridModel, PostModel, CommentModel, AuthorModel, ArticleModel
+from blog.models import PostTagModel, BlogGridModel, PostModel, CommentModel, AuthorModel, ArticleModel, \
+BlogContact
 
 
 @admin.register(PostTagModel)
@@ -19,6 +20,9 @@ class BlogGridAdmin(admin.ModelAdmin):
     list_display = ('blog_title',)
     list_display_links = ('blog_title',)
 
+class BlogContactAdmin(admin.TabularInline):
+    model = BlogContact
+
 
 @admin.register(PostModel)
 class PostModelAdmin(admin.ModelAdmin):
@@ -26,6 +30,9 @@ class PostModelAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'auther')
     search_fields = ('title', 'body')
     autocomplete_fields = ('auther', 'tag')
+    inlines = [
+        BlogContactAdmin
+    ]
 
 
 @admin.register(CommentModel)

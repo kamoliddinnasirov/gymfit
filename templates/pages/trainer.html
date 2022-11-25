@@ -7,22 +7,21 @@
         <section class="page-title bg-2">
             <div class="container">
                 <div class="row">
-                    {% for object in trainer_banners %}
-                        <div class="col-lg-12 text-center">
-                            <ul class="list-inline mb-0">
-                                <li class="list-inline-item"><a href="../home/index.html"
-                                                                class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a>
-                                </li>
-                                <li class="list-inline-item"><span class="text-white">|</span></li>
-                                <li class="list-inline-item"><a href="#"
-                                                                class="text-color text-uppercase text-sm letter-spacing">Team</a>
-                                </li>
-                            </ul>
 
+                    <div class="col-lg-12 text-center">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item"><a href="../home/index.html"
+                                                            class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a>
+                            </li>
+                            <li class="list-inline-item"><span class="text-white">|</span></li>
+                            <li class="list-inline-item text-color text-uppercase text-sm letter-spacing">Team
+                            </li>
+                        </ul>
+                        {% for object in trainer_banners %}
                             <h1 class="text-lg text-white mt-2">{{ object.trainer_title }}</h1>
+                        {% endfor %}
+                    </div>
 
-                        </div>
-                    {% endfor %}
                 </div>
             </div>
         </section>
@@ -44,8 +43,9 @@
                         <div class="card border-0 mb-1  bg-transparent rounded-0 mb-4">
                             <div class="row no-gutters align-items-center">
                                 {% for train_image in gallery %}
-                                    <div class="col-md-6 " >
-                                        <img style="width: 400px; height: 500px;" src="{{ train_image.image.url }}" alt="" class="img-fluid w-100">
+                                    <div class="col-md-6 ">
+                                        <img style="width: 400px; height: 500px;" src="{{ train_image.image.url }}"
+                                             alt="" class="img-fluid w-100">
                                     </div>
                                 {% endfor %}
                                 {% for trainer in our_trainer %}
