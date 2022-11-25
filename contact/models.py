@@ -1,3 +1,4 @@
+from django.core.validators import EmailValidator
 from django.db import models
 from home.models import BaseModel
 from django.utils.translation import gettext_lazy as _
@@ -19,7 +20,7 @@ class ContactSendModel(BaseModel):
     title = models.CharField(max_length=100, null=True, blank=True, verbose_name=_('title'))
     sub_title = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('sub title'))
     name = models.CharField(max_length=32, verbose_name=_('name'))
-    email = models.EmailField(verbose_name=_('email'))
+    email = models.EmailField(validators=[EmailValidator()], verbose_name=_('email'))
     massage = models.TextField(verbose_name=_('massage'))
 
     def __str__(self):

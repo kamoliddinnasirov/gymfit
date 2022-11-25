@@ -70,8 +70,8 @@ class PostModel(BaseModel):
 
     class Meta:
         ordering = ('-id',)
-        verbose_name = _('post')
-        verbose_name_plural = _('posts')
+        verbose_name = _('blog post')
+        verbose_name_plural = _('blog posts')
 
 
 class CommentModel(BaseModel):

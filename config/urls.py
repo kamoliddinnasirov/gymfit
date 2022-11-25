@@ -16,6 +16,7 @@ urlpatterns += i18n_patterns(
     path('pages/', include('pages.urls')),
     path('services/', include('services.urls')),
     path('contact/', include('contact.urls')),
+    path('membership/', include('membership.urls')),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
